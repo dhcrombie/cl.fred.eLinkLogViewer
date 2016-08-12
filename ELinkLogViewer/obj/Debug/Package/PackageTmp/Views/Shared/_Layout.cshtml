@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div class="NavMenu navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("eLink Log Viewer", "Index", "LogViewer", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*<li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "active" : "")">@Html.ActionLink("Dashboard", "Index", "Home", new { area = "" }, null)</li>*@
+                    <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "LogViewer" ? "active" : "")">@Html.ActionLink("Log Viewer", "Index", "LogViewer", new { area = "" }, null)</li>
+                    @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>*@
+                </ul>
+                <ul class="eLink-Status nav navbar-nav navbar-right">
+                    <li><a href="#" data-bind="text:kocStatus">Status: Contacting...</a></li>
+                    <li data-bind="with:vmBtnToggleService"><button class="btn btn-success" data-bind="css:kocClass, click:koeToggleService, attr:{'disabled':kocDisabled}" disabled style="margin:8px;"><span class="glyphicon glyphicon-start" style="margin-right:10px;" data-bind="css:kocIconClass"></span><span data-bind="text:kocLabel">Start</span></button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid body-content">
+        @RenderBody()
+    </div>
+    <footer class="footer">
+        <div class="container-fluid">
+            <p class="pull-right">&copy; @DateTime.Now.Year - Crombie Lockwood</p>
+        </div>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js'></script>
+    <script type='text/javascript' src='http://code.jquery.com/ui/1.11.4/jquery-ui.js'></script>
+    <script type='text/javascript' src='http://momentjs.com/downloads/moment.js'></script>
+    @Scripts.Render("~/Bundles/Prism")
+    <script type="text/javascript">
+        var g_StatusUri = "@(System.Web.Configuration.WebConfigurationManager.AppSettings["ELink_StatusUri"])";
+        var g_StartUri = "@(System.Web.Configuration.WebConfigurationManager.AppSettings["ELink_StartUri"])";
+        var g_StopUri = "@(System.Web.Configuration.WebConfigurationManager.AppSettings["ELink_StopUri"])";
+        var g_StatusPollRateSecs = "@(System.Web.Configuration.WebConfigurationManager.AppSettings["ELink_StatusPollRateSecs"])";
+    </script>
+    @Scripts.Render("~/Bundles/Site")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

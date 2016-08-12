@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="eLinkLogModelStoreContainer" CdmEntityContainer="eLinkLogEntities">
+    <EntitySetMapping Name="Logs">
+      <EntityTypeMapping TypeName="eLinkLogModel.Log">
+        <MappingFragment StoreEntitySet="Log">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="cover" ColumnName="cover" />
+          <ScalarProperty Name="branch" ColumnName="branch" />
+          <ScalarProperty Name="client" ColumnName="client" />
+          <ScalarProperty Name="clientnumber" ColumnName="clientnumber" />
+          <ScalarProperty Name="invoice" ColumnName="invoice" />
+          <ScalarProperty Name="clienttransaction" ColumnName="clienttransaction" />
+          <ScalarProperty Name="policytransaction" ColumnName="policytransaction" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="filecontents" ColumnName="filecontents" />
+          <ScalarProperty Name="filename" ColumnName="filename" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

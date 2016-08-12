@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="LogItemViewer">
+    <h2>Details For Request @ViewBag.LogItem.Request.Id</h2>
+    <h3>@ViewBag.LogItem.Request.Filename</h3>
+    
+    <ul class="nav nav-tabs" style="margin-top:20px;">
+        <li class="active"><a href="#Request" data-toggle="tab">Request</a></li>
+        <li><a href="#Response" data-toggle="tab">Response</a></li>
+    </ul>
+    
+    <div class="tab-content" style="padding-top:20px;">
+        <div id="Request" class="tab-pane fade in active">
+            <div class="row">
+                <label class="col-xs-1">Cover</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Request.Cover</div>
+                <label class="col-xs-1">Invoice Number</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Request.Invoice</div>
+            </div>
+            <div class="row">
+                <label class="col-xs-1">Version</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Request.Version</div>
+                <label class="col-xs-1">Client Transaction</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Request.ClientTransaction</div>
+            </div>
+            <div class="row">
+                <label class="col-xs-1">Branch</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Request.Branch</div>
+                <label class="col-xs-1">Policy Transaction</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Request.PolicyTransaction</div>
+            </div>
+            <div class="row">
+                <label class="col-xs-1">Client</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Request.Client</div>
+                <label class="col-xs-1">Client Number</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Request.ClientNumber</div>
+            </div>
+            <div class="row">
+                <label class="col-xs-1">Timestamp</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Request.Timestamp</div>
+            </div>
+            <pre style="margin-top:20px;"><code class="language-markup">@ViewBag.LogItem.Request.FileContents</code></pre>
+        </div>
+        <div id="Response" class="tab-pane fade">
+            <div class="row">
+                <label class="col-xs-1">Cover</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Response.Cover</div>
+                <label class="col-xs-1">Invoice Number</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Response.Invoice</div>
+            </div>
+            <div class="row">
+                <label class="col-xs-1">Version</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Response.Version</div>
+                <label class="col-xs-1">Client Transaction</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Response.ClientTransaction</div>
+            </div>
+            <div class="row">
+                <label class="col-xs-1">Branch</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Response.Branch</div>
+                <label class="col-xs-1">Policy Transaction</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Response.PolicyTransaction</div>
+            </div>
+            <div class="row">
+                <label class="col-xs-1">Client</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Response.Client</div>
+                <label class="col-xs-1">Client Number</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Response.ClientNumber</div>
+            </div>
+            <div class="row">
+                <label class="col-xs-1">Timestamp</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Response.Timestamp</div>
+                <label class="col-xs-1">Response Time</label>
+                <div class="col-xs-5">@(ViewBag.LogItem.Response.Timestamp - ViewBag.LogItem.Request.Timestamp)</div>
+            </div>
+            <div class="row">
+                <label class="col-xs-1">Status</label>
+                <div class="col-xs-5">@ViewBag.LogItem.Response.Status</div>
+            </div>
+            <pre style="margin-top:20px;"><code class="language-markup">@ViewBag.LogItem.Response.FileContents</code></pre>
+        </div>
+    </div>
+</div>

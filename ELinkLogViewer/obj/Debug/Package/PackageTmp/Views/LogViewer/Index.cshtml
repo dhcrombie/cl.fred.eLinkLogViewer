@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "Log Viewer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts {
+    @Scripts.Render("~/Bundles/LogViewer/Index")
+}
+<div class="LogViewer">
+    <div class="NavSearch navbar navbar-fixed-top" style="margin-top:50px;background:#EEE;">
+        <div class="container-fluid body-content">
+            <div class="row gap">
+                <h3 class="col-xs-12">Log Viewer</h3>
+            </div>
+            <div class="row gap">
+                <label class="col-xs-1">From Date</label>
+                <div class="col-xs-3"><input id="txtDateFrom" type="text" class="DateFilter form-control col-xs-12" /></div>
+                <label class="col-xs-1">To Date</label>
+                <div class="col-xs-3"><input id="txtDateTo" type="text" class="DateFilter form-control col-xs-12" /></div>
+                <label class="col-xs-1">Cover</label>
+                <div class="col-xs-3"><input type="text" class="form-control col-xs-12" data-bind="value:koFilterCover" /></div>
+            </div>
+            <div class="row gap">
+                <label class="col-xs-1">Branch</label>
+                <div class="col-xs-3"><input type="text" class="form-control col-xs-12" data-bind="value:koFilterBranch" /></div>
+                <label class="col-xs-1">Client</label>
+                <div class="col-xs-3"><input type="text" class="form-control col-xs-12" data-bind="value:koFilterClient" /></div>
+                <label class="col-xs-1">Client Number</label>
+                <div class="col-xs-3"><input type="text" class="form-control col-xs-12" data-bind="value:koFilterClientNo" /></div>
+            </div>
+            <div class="row gap">
+                <label class="col-xs-1">File Contents</label>
+                <div class="col-xs-3"><input type="text" class="form-control col-xs-12" data-bind="value:koFilterFileCont" /></div>
+                <label class="col-xs-1">Page Size</label>
+                <div class="col-xs-3"><input type="text" class="form-control col-xs-12" data-bind="value:koPageSize" /></div>
+                <div class="col-xs-1"></div>
+                <div class="col-xs-3"><button class="btn btn-primary form-control col-xs-12" data-bind="click:koeSearch">Search</button></div>
+            </div>
+            <div class="row gap">
+                <div class="col-xs-12">Showing <span data-bind="text:koaLogItems().length"></span> of <span data-bind="text:koTotalItemCount"></span> Items</div>
+            </div>
+            <div class="row">
+                <ul class="col-xs-12 LogEntryHead">
+                    <li class="col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-2">Time</div>
+                            <div class="col-xs-1">Cover</div>
+                            <div class="col-xs-1">Version</div>
+                            <div class="col-xs-1">Branch</div>
+                            <div class="col-xs-2">Client</div>
+                            <div class="col-xs-1">Client Number</div>
+                            <div class="col-xs-1">Invoice</div>
+                            <div class="col-xs-1">Client Transaction</div>
+                            <div class="col-xs-1">Policy Transaction</div>
+                            <div class="col-xs-1">Status</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row" style="padding-top:245px;">
+        <ul class="col-xs-12 LogEntryList">
+            <!-- ko foreach: koaLogItems -->
+            <li class="Item col-xs-12">
+                <a href="#" data-bind="attr:{href:'/LogViewer/Details/'+Request.Id}" target="_blank">
+                    <div class="row">
+                        <div class="col-xs-2" data-bind="text:moment(Request.Timestamp).format('DD/MM/YYYY hh:mm:ssa')"></div>
+                        <div class="col-xs-1" data-bind="text:Request.Cover"></div>
+                        <div class="col-xs-1" data-bind="text:Request.Version"></div>
+                        <div class="col-xs-1" data-bind="text:Request.Branch"></div>
+                        <div class="col-xs-2" data-bind="text:Request.Client"></div>
+                        <div class="col-xs-1" data-bind="text:Request.ClientNumber"></div>
+                        <div class="col-xs-1" data-bind="text:Request.Invoice"></div>
+                        <div class="col-xs-1" data-bind="text:Request.ClientTransaction"></div>
+                        <div class="col-xs-1" data-bind="text:Request.PolicyTransaction"></div>
+                        <div class="col-xs-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2" data-bind="text:moment(Response.Timestamp).format('DD/MM/YYYY hh:mm:ssa')"></div>
+                        <div class="col-xs-1" data-bind="text:Response.Cover"></div>
+                        <div class="col-xs-1" data-bind="text:Response.Version"></div>
+                        <div class="col-xs-1" data-bind="text:Response.Branch"></div>
+                        <div class="col-xs-2" data-bind="text:Response.Client"></div>
+                        <div class="col-xs-1" data-bind="text:Response.ClientNumber"></div>
+                        <div class="col-xs-1" data-bind="text:Response.Invoice"></div>
+                        <div class="col-xs-1" data-bind="text:Response.ClientTransaction"></div>
+                        <div class="col-xs-1" data-bind="text:Response.PolicyTransaction"></div>
+                        <div class="col-xs-1" data-bind="text:Response.Status"></div>
+                    </div>
+                </a>
+            </li>
+            <!-- /ko -->
+            <!-- ko if: kocIsMoreItems() && !koLoadingItems() -->
+            <li class="col-xs-12">
+                <div class="row">
+                    <div class="btnLoadMore col-xs-12" data-bind="click:koeLoadMore">Load More</div>
+                </div>
+            </li>
+            <!-- /ko -->
+            <!-- ko if: koLoadingItems -->
+            <li class="col-xs-12" style="border-bottom:none;">
+                <div class="row">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                            <span class="sr-only"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 text-center">Loading Items...</div>
+                </div>
+            </li>
+            <!-- /ko -->
+            <!-- ko if: !koLoadingItems() && koaLogItems().length < 1 -->
+            <li class="col-xs-12" style="font-size:16pt;border-bottom:none;">
+                <div class="row">
+                    <div class="col-xs-12 text-center" style="padding:30px;">No Results</div>
+                </div>
+            </li>
+            <!-- /ko -->
+        </ul>
+    </div>
+</div>

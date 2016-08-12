@@ -1,0 +1,40 @@
+﻿.NavSearch > .container-fluid > .row.gap {
+    margin-bottom:5px;
+}
+ul.LogEntryHead {
+    margin:0;
+}
+ul.LogEntryHead, ul.LogEntryList {
+    list-style:none;
+}
+ul.LogEntryHead > li {
+    font-weight:bold;
+    border-top:1px #888 solid;
+    border-bottom:1px #888 solid;
+    background:#AAA;
+}
+ul.LogEntryList > li {
+    border-bottom:1px #AAA solid;
+}
+ul.LogEntryList > li:nth-child(2n) {
+    background:#DDD;
+}
+ul.LogEntryList > li.Item:hover {
+    background:#cdffff;
+    cursor:pointer;
+}
+ul.LogEntryList > li > a > .row > div {
+    color:#000;
+    line-height:30px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+.btnLoadMore {
+    padding:5px 15px;
+    border:1px solid #666;
+    background:#AAA;
+    font-weight:bold;
+    text-align:center;
+    cursor:pointer;
+}
